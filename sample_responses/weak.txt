@@ -1,0 +1,7 @@
+HTTP/1.1 200 OK
+Server: Apache/2.4.49 (Unix)
+X-Powered-By: PHP/7.4.3
+Content-Security-Policy: default-src * 'unsafe-inline' 'unsafe-eval'
+Set-Cookie: session_id=xyz789fictional; Path=/
+Set-Cookie: prefs=darkmode; Path=/
+Content-Type: text/html; charset=utf-8
