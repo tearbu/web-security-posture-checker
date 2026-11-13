@@ -1,18 +1,12 @@
 # Web Security Posture Checker
 
-A small, dependency-free tool that scores the security posture of an HTTP
-response — the browser-facing controls that are cheap to get right and
-routinely found missing in penetration tests and configuration reviews.
+A small tool with no dependencies. It scores the security posture of an HTTP response. These are the browser-facing controls. They are cheap to get right, and they still turn up missing in penetration tests and configuration reviews all the time.
 
 ## The problem it solves
 
-Missing or weak security headers and cookie flags are among the most
-common findings in web assessments: no HSTS, a CSP with `unsafe-inline`,
-session cookies without `Secure`/`HttpOnly`/`SameSite`, and servers
-advertising exact version numbers to anyone who asks. Reviewing them by
-hand is tedious and inconsistent. This tool checks a response in one pass
-and produces a 0–100 score with a severity-rated, remediation-backed
-finding for every gap.
+Missing or weak security headers and cookie flags show up in web assessments again and again. No HSTS. A CSP with `unsafe-inline`. Session cookies without `Secure`/`HttpOnly`/`SameSite`. Servers that hand out exact version numbers to anyone who asks.
+
+Checking this by hand is tedious. It is also easy to do inconsistently. This tool checks a response in one pass and gives you a score from 0 to 100, plus a finding for every gap. Each finding has a severity and a note on how to fix it.
 
 ## What it checks
 
@@ -90,18 +84,12 @@ Score: 10/100  Grade: F
 
 ## Design notes and limitations
 
-- **Scoring** is weighted by control importance (CSP 20, HSTS 15, cookies
-  15, disclosure 15, the rest smaller) and normalised to 100. It is a
-  triage score, not a substitute for a full assessment.
-- **Headers only.** The tool evaluates the response surface; it does not
-  test TLS configuration, authentication, or application logic.
-- **Cookies** are scored proportionally: each cookie contributes an equal
-  share of the cookie points, deducted per missing flag.
-- A response with **no cookies** scores full cookie marks with an
-  informational note — there is nothing to protect.
-- Sample responses in `sample_responses/` are fictional, hand-written
-  captures: one hardened (`100/100`) and one weak (`10/100`).
+- **Scoring** is weighted by how much the control matters (CSP 20, HSTS 15, cookies 15, disclosure 15, the rest smaller) and normalised to 100. Treat it as a triage score. It is not a substitute for a full assessment.
+- **Headers only.** The tool looks at the response surface. It does not test TLS configuration, authentication, or application logic.
+- **Cookies** are scored proportionally. Each cookie gets an equal share of the cookie points, and points come off for each missing flag.
+- A response with **no cookies** scores full cookie marks, with an informational note. There is nothing to protect.
+- Sample responses in `sample_responses/` are fictional, hand-written captures: one hardened (`100/100`) and one weak (`10/100`).
 
 ## License
 
-MIT — see `LICENSE`.
+MIT. See `LICENSE`.
